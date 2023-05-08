@@ -224,9 +224,11 @@ void retornaDisplay(){
 
 // FUNCAO QUE EXECUTA O GIRO 360 GRAUS (STEP MOTOR)
 void executaMotor() {
-    motor.step(passosPorRevolucao);
+    motor.step(passosPorRevolucao / 2);
     delay(1000);
     motor.step(-passosPorRevolucao);
+    delay(1000);
+    motor.step(passosPorRevolucao / 2);
     delay(1000);
 }
 
