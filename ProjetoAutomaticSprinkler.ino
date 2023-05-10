@@ -193,7 +193,6 @@ void leituraConversaoSensores() {
 int verificaSeIrrigaSolo() {
   if(percentualUmidade > plantaUmidade){
     // SE NAO EXECUTAR, DEVE MOSTRAR NO DISPLAY AS INFORMACOES
-      desligaRele();
       lcd.setCursor(0,0);
       lcd.print(plantaNome);
       lcd.print("          ");
@@ -206,7 +205,6 @@ int verificaSeIrrigaSolo() {
     }
     else {
     // SE EXECUTAR DEVE FUNCIONAR O MOTOR
-      ligaRele();
       lcd.setCursor(0,0);
       lcd.print("MOTOR IRRIGANDO");
       lcd.setCursor(0,1);
@@ -224,12 +222,13 @@ void retornaDisplay(){
 
 // FUNCAO QUE EXECUTA O GIRO 360 GRAUS (STEP MOTOR)
 void executaMotor() {
-    motor.step(passosPorRevolucao / 2);
+    ligaRele();
+    delay(1000);
+    motor.step(passosPorRevolucao);
     delay(1000);
     motor.step(-passosPorRevolucao);
     delay(1000);
-    motor.step(passosPorRevolucao / 2);
-    delay(1000);
+    desligaRele();
 }
 
 // FUNCAO QUE LIGA O RELE PARA ACIONAR A BOMBA D'AGUA
